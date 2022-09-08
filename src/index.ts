@@ -1,8 +1,9 @@
-// Based on and copied from: https://github.com/vitejs/vite/blob/main/packages/create-vite/src/index.js
-// @ts-check
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+// Based on (and copied from):
+// https://github.com/vitejs/vite/blob/main/packages/create-vite/src/index.ts
+
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import minimist from 'minimist';
 import prompts from 'prompts';
 import { green, red, reset, yellow } from 'kolorist';
@@ -15,7 +16,9 @@ import {
 	toValidPackageName,
 } from './utils';
 
-const argv = minimist(process.argv.slice(2), { string: ['_'] });
+const argv = minimist<{
+	t?: string;
+}>(process.argv.slice(2), { string: ['_'] });
 const cwd = process.cwd();
 console.log('process.cwd(): ', process.cwd());
 console.log('import.meta.url: ', import.meta.url);
@@ -27,7 +30,7 @@ console.log('import.meta.url: ', import.meta.url);
 	const getProjectName = () =>
 		!targetDir ? path.basename(path.resolve()) : targetDir;
 
-	let result = {};
+	let result: prompts.Answers<'projectName' | 'overwrite' | 'packageName'>;
 	try {
 		result = await prompts(
 			[
@@ -77,8 +80,8 @@ console.log('import.meta.url: ', import.meta.url);
 				},
 			}
 		);
-	} catch (e) {
-		console.log(e.message);
+	} catch (err: any) {
+		console.log(err.message);
 		return;
 	}
 
@@ -99,11 +102,7 @@ console.log('import.meta.url: ', import.meta.url);
 		`template`
 	);
 
-	/**
-	 * @param {string} file
-	 * @param {string} [content]
-	 */
-	const write = (file, content) => {
+	const write = (file: string, content?: string) => {
 		const targetPath = path.join(
 			root,
 			file === '_gitignore' ? '.gitignore' : file
