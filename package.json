@@ -1,0 +1,36 @@
+{
+  "name": "@vinsjo/create-microbundle",
+  "version": "1.0.0",
+  "description": "Scaffold a basic microbundle project, based on create-vite: https://github.com/vitejs/vite/tree/main/packages/create-vite",
+  "author": "Vincent Sjögren",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vinsjo/create-microbundle"
+  },
+  "main": "index.js",
+  "bin": "index.js",
+  "files": [
+    "index.js",
+    "template",
+    "dist"
+  ],
+  "scripts": {
+    "build": "npx unbuild -y",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@types/minimist": "^1.2.2",
+    "@types/prompts": "^2.0.14",
+    "eslint": "^8.23.0",
+    "kolorist": "^1.5.1",
+    "minimist": "^1.2.6",
+    "prompts": "^2.4.2",
+    "unbuild": "^0.8.10"
+  },
+  "keywords": [
+    "microbundle",
+    "npm",
+    "npx"
+  ]
+}

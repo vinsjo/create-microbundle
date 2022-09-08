@@ -1,0 +1,33 @@
+{
+    "name": "my-microbundle-project",
+    "version": "1.0.0",
+    "description": "",
+    "author": "",
+    "license": "MIT",
+    "type": "module",
+    "source": "./src/index.ts",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "umd:main": "./dist/index.umd.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "require": "./dist/index.cjs",
+            "import": "./dist/index.js",
+            "default": "./dist/index.modern.js"
+        }
+    },
+    "files": [
+        "src",
+        "dist"
+    ],
+    "scripts": {
+        "build": "microbundle",
+        "dev": "microbundle watch",
+        "prepublishOnly": "npm run build"
+    },
+    "devDependencies": {
+        "microbundle": "latest"
+    },
+    "keywords": []
+}
