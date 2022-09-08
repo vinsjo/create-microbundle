@@ -20,8 +20,6 @@ const argv = minimist<{
 	t?: string;
 }>(process.argv.slice(2), { string: ['_'] });
 const cwd = process.cwd();
-console.log('process.cwd(): ', process.cwd());
-console.log('import.meta.url: ', import.meta.url);
 
 (async function main() {
 	let targetDir = formatTargetDir(argv._[0]);
