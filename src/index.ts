@@ -124,4 +124,10 @@ const cwd = process.cwd();
 			root
 		)}:\n`
 	);
+	console.log(`\nNow run:\n`);
+	if (root !== cwd) {
+		console.log(`  cd ${path.relative(cwd, root)}`);
+	}
+	console.log('  npm install');
+	console.log();
 })().catch((e) => console.error(red(e)));
