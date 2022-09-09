@@ -1,6 +1,6 @@
 {
   "name": "@vinsjo/create-microbundle",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Scaffold a basic microbundle project, based on create-vite: https://github.com/vitejs/vite/tree/main/packages/create-vite",
   "author": "Vincent Sjögren",
   "license": "MIT",
