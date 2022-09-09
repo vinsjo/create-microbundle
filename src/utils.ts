@@ -1,22 +1,44 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-export function copy(src: string, dest: string) {
+export function matchesPatterns(
+	str: string,
+	matchPatterns: (string | RegExp)[]
+) {
+	if (!Array.isArray(matchPatterns)) return false;
+	const patterns = matchPatterns
+		.filter((p) => p instanceof RegExp || typeof p === 'string')
+		.map((p) => (p instanceof RegExp ? p : new RegExp(p)));
+	return patterns.some((p) => p.test(str));
+}
+
+export function copy(
+	src: string,
+	dest: string,
+	excludePatterns?: (string | RegExp)[]
+) {
+	if (excludePatterns && matchesPatterns(src, excludePatterns)) return;
+	if (fs.statSync(src).isDirectory()) {
+		return copyDir(src, dest, excludePatterns);
+	}
 	fs.statSync(src).isDirectory()
 		? copyDir(src, dest)
 		: fs.copyFileSync(src, dest);
 }
-
-export function formatTargetDir(targetDir: string | undefined) {
-	return targetDir?.trim().replace(/\/+$/g, '') || '';
-}
-export function copyDir(srcDir: string, destDir: string) {
+export function copyDir(
+	srcDir: string,
+	destDir: string,
+	excludePatterns?: (string | RegExp)[]
+) {
 	fs.mkdirSync(destDir, { recursive: true });
 	for (const file of fs.readdirSync(srcDir)) {
 		const srcFile = path.resolve(srcDir, file);
 		const destFile = path.resolve(destDir, file);
-		copy(srcFile, destFile);
+		copy(srcFile, destFile, excludePatterns);
 	}
+}
+export function formatTargetDir(targetDir: string | undefined) {
+	return targetDir?.trim().replace(/\/+$/g, '') || '';
 }
 export function isEmpty(path: string) {
 	const files = fs.readdirSync(path);
