@@ -3,6 +3,10 @@
     "version": "1.0.0",
     "description": "",
     "author": "",
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
     "license": "MIT",
     "type": "module",
     "source": "./src/index.ts",
@@ -29,5 +33,9 @@
     "devDependencies": {
         "microbundle": "latest"
     },
+    "browserslist": [
+        "defaults and supports es6-module",
+        "maintained node versions"
+    ],
     "keywords": []
 }
