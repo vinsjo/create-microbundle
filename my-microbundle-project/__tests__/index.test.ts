@@ -1,4 +1,5 @@
-const {add} = require("../src");
+import { describe, expect, test } from '@jest/globals';
+import {add} from "../src";
 
 describe("sample test", () => {
     test("1 + 2 = 3", () => {

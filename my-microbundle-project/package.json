@@ -1,0 +1,52 @@
+{
+  "name": "my-microbundle-project",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "MIT",
+  "type": "module",
+  "source": "./src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "umd:main": "./dist/index.umd.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "require": "./dist/index.cjs",
+    "import": "./dist/index.js",
+    "default": "./dist/index.modern.js"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "lint": "eslint src/** __tests__/** --ext .ts",
+    "format": "prettier --write .",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "pre-commit": "npm test && pretty-quick --staged",
+    "pre-push": "npm test && npm run lint && npm run build",
+    "prepublishOnly": "npm run pre-push"
+  },
+  "devDependencies": {
+    "microbundle": "latest",
+    "ts-jest": "latest",
+    "@jest/globals": "latest",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "prettier": "latest",
+    "pretty-quick": "latest",
+    "eslint": "latest"
+  },
+  "browserslist": [
+    "defaults and supports es6-module",
+    "maintained node versions"
+  ],
+  "keywords": []
+}

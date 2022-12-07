@@ -26,7 +26,7 @@
     "scripts": {
         "build": "microbundle",
         "dev": "microbundle watch",
-        "lint": "eslint src/** __tests__/** --ext .js,.cjs",
+        "lint": "eslint src/** __tests__/** --ext .js",
         "format": "prettier --write .",
         "test": "jest",
         "test:coverage": "jest --coverage",
@@ -35,6 +35,8 @@
         "prepublishOnly": "npm run pre-push"
     },
     "devDependencies": {
+        "@babel/plugin-transform-modules-commonjs": "latest",
+        "babel-jest": "latest",
         "@types/jest": "latest",
         "microbundle": "latest",
         "jest": "latest",
